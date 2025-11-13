@@ -21,6 +21,8 @@ export const ContactCard = ({
   const [isFlipped, setIsFlipped] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const swipeRightAudioRef = useRef<HTMLAudioElement | null>(null);
+  const swipeLeftAudioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleDragStart = (clientX: number, clientY: number) => {
     if (!isTop) return;
@@ -42,6 +44,22 @@ export const ContactCard = ({
     const threshold = 150;
     if (Math.abs(dragOffset.x) > threshold) {
       const direction = dragOffset.x > 0 ? "right" : "left";
+      
+      // Play swipe sound
+      if (direction === "right") {
+        if (!swipeRightAudioRef.current) {
+          swipeRightAudioRef.current = new Audio('/swipe-right.mp3');
+        }
+        swipeRightAudioRef.current.currentTime = 0;
+        swipeRightAudioRef.current.play().catch(e => console.log('Audio play failed:', e));
+      } else {
+        if (!swipeLeftAudioRef.current) {
+          swipeLeftAudioRef.current = new Audio('/swipe-left.mp3');
+        }
+        swipeLeftAudioRef.current.currentTime = 0;
+        swipeLeftAudioRef.current.play().catch(e => console.log('Audio play failed:', e));
+      }
+      
       onSwipe?.(direction);
     } else {
       setDragOffset({ x: 0, y: 0 });
