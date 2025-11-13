@@ -1,6 +1,11 @@
 import { Heart } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export const GreatJobScreen = () => {
+interface GreatJobScreenProps {
+  onKeepGoing: () => void;
+}
+
+export const GreatJobScreen = ({ onKeepGoing }: GreatJobScreenProps) => {
   return (
     <div className="h-full flex items-center justify-center px-6">
       <div className="text-center space-y-12 max-w-md animate-fade-in">
@@ -44,11 +49,22 @@ export const GreatJobScreen = () => {
           </p>
         </div>
         
+        {/* Keep Going Button */}
+        <div className="pt-8">
+          <Button
+            onClick={onKeepGoing}
+            size="lg"
+            className="px-8 py-6 text-lg font-semibold rounded-full bg-primary hover:bg-primary/90 transition-all hover:scale-105"
+          >
+            Keep Going
+          </Button>
+        </div>
+        
         {/* Bottom message with elegant styling */}
-        <div className="pt-12">
+        <div className="pt-8">
           <div className="inline-block px-6 py-3 bg-muted/30 rounded-full backdrop-blur-sm border border-muted-foreground/10">
             <p className="text-sm text-muted-foreground">
-              Come back tomorrow to continue reconnecting
+              Or come back tomorrow to continue reconnecting
             </p>
           </div>
         </div>

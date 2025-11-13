@@ -13,6 +13,7 @@ const Index = () => {
   const [contacts, setContacts] = useState<Contact[]>(dummyContacts);
   const [viewedCount, setViewedCount] = useState(0);
   const [hasReachedLimit, setHasReachedLimit] = useState(false);
+  const [showBonusCard, setShowBonusCard] = useState(false);
 
   // Initialize viewed count from localStorage
   useEffect(() => {
@@ -38,6 +39,16 @@ const Index = () => {
   const handleSwipe = (direction: "left" | "right") => {
     console.log(`Swiped ${direction}`);
     
+    // If it was a bonus card, go back to Great Job screen
+    if (showBonusCard) {
+      setShowBonusCard(false);
+      setHasReachedLimit(true);
+      setTimeout(() => {
+        setContacts((prev) => prev.slice(1));
+      }, 300);
+      return;
+    }
+    
     // Increment viewed count
     const newCount = viewedCount + 1;
     setViewedCount(newCount);
@@ -52,6 +63,11 @@ const Index = () => {
     setTimeout(() => {
       setContacts((prev) => prev.slice(1));
     }, 300);
+  };
+
+  const handleKeepGoing = () => {
+    setShowBonusCard(true);
+    setHasReachedLimit(false);
   };
 
   return (
@@ -70,7 +86,7 @@ const Index = () => {
       {/* Cards Container or Great Job Screen */}
       <div className="flex-1 flex items-center justify-center relative px-6 py-8">
         {hasReachedLimit ? (
-          <GreatJobScreen />
+          <GreatJobScreen onKeepGoing={handleKeepGoing} />
         ) : (
           <div className="relative w-full max-w-md h-[500px] flex items-center justify-center">
             {contacts.length === 0 ? (
