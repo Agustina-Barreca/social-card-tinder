@@ -2,40 +2,10 @@ import { useState } from "react";
 import { ContactCard } from "@/components/ContactCard";
 import { TopNavigation } from "@/components/TopNavigation";
 import { BottomNavigation } from "@/components/BottomNavigation";
-import avatar1 from "@/assets/avatar1.jpg";
-import avatar2 from "@/assets/avatar2.jpg";
-import avatar3 from "@/assets/avatar3.jpg";
-
-interface Contact {
-  id: string;
-  name: string;
-  avatar: string;
-  lastConnected: string;
-}
-
-const initialContacts: Contact[] = [
-  {
-    id: "1",
-    name: "Jane Doe",
-    avatar: avatar1,
-    lastConnected: "Nov, 7, 2025",
-  },
-  {
-    id: "2",
-    name: "John Smith",
-    avatar: avatar2,
-    lastConnected: "Nov, 5, 2025",
-  },
-  {
-    id: "3",
-    name: "Sarah Johnson",
-    avatar: avatar3,
-    lastConnected: "Nov, 3, 2025",
-  },
-];
+import { dummyContacts, type Contact } from "@/data/contacts";
 
 const Index = () => {
-  const [contacts, setContacts] = useState<Contact[]>(initialContacts);
+  const [contacts, setContacts] = useState<Contact[]>(dummyContacts);
 
   const handleSwipe = (direction: "left" | "right") => {
     console.log(`Swiped ${direction}`);
@@ -71,9 +41,7 @@ const Index = () => {
             contacts.slice(0, 3).map((contact, index) => (
               <ContactCard
                 key={contact.id}
-                name={contact.name}
-                avatar={contact.avatar}
-                lastConnected={contact.lastConnected}
+                contact={contact}
                 onSwipe={handleSwipe}
                 isTop={index === 0}
                 index={index}

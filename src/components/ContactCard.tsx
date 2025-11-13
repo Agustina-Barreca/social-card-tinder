@@ -1,19 +1,16 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Calendar, Star, Info } from "lucide-react";
+import type { Contact } from "@/data/contacts";
 
 interface ContactCardProps {
-  name: string;
-  avatar: string;
-  lastConnected: string;
+  contact: Contact;
   onSwipe?: (direction: "left" | "right") => void;
   isTop?: boolean;
   index?: number;
 }
 
 export const ContactCard = ({ 
-  name, 
-  avatar, 
-  lastConnected, 
+  contact, 
   onSwipe,
   isTop = false,
   index = 0
@@ -89,8 +86,8 @@ export const ContactCard = ({
           <div className="mb-4 flex justify-center">
             <div className="w-48 h-48 rounded-2xl overflow-hidden bg-secondary">
               <img 
-                src={avatar} 
-                alt={name}
+                src={contact.photo} 
+                alt={contact.name}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -98,7 +95,7 @@ export const ContactCard = ({
 
           {/* Name */}
           <h2 className="text-3xl font-bold text-card-foreground text-center mb-6">
-            {name}
+            {contact.name}
           </h2>
 
           {/* Divider */}
@@ -114,7 +111,7 @@ export const ContactCard = ({
 
           {/* Last connected */}
           <p className="text-center text-muted-foreground mb-4 text-sm">
-            Last connected: {lastConnected}
+            Last connected: {contact.lastContactDate}
           </p>
 
           {/* Bottom icons */}
