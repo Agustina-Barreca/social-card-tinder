@@ -87,10 +87,33 @@ export default {
             height: "0",
           },
         },
+        "shuffle-card": {
+          "0%": {
+            transform: "translateX(0) translateY(0) rotate(0deg)",
+            opacity: "1",
+          },
+          "25%": {
+            transform: "translateX(-40px) translateY(-30px) rotate(-15deg)",
+            opacity: "0.8",
+          },
+          "50%": {
+            transform: "translateX(40px) translateY(-20px) rotate(15deg)",
+            opacity: "0.9",
+          },
+          "75%": {
+            transform: "translateX(-30px) translateY(-10px) rotate(-10deg)",
+            opacity: "0.85",
+          },
+          "100%": {
+            transform: "translateX(0) translateY(0) rotate(2deg)",
+            opacity: "1",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "shuffle-card": "shuffle-card 3s ease-in-out forwards",
       },
     },
   },
