@@ -43,11 +43,11 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#3d9999] p-8 overflow-hidden">
       {/* Top text "It's Been" - curved upward */}
       <div className="relative mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-        <svg viewBox="0 0 400 80" className="w-full max-w-sm">
+        <svg viewBox="0 0 400 120" className="w-full max-w-sm">
           <defs>
             <path
               id="arc-up"
-              d="M 50,70 Q 200,10 350,70"
+              d="M 50,100 Q 200,30 350,100"
               fill="transparent"
             />
           </defs>
@@ -143,11 +143,11 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
 
       {/* Bottom text "a Minute" - curved downward */}
       <div className="relative animate-fade-in" style={{ animationDelay: '0.6s' }}>
-        <svg viewBox="0 0 400 80" className="w-full max-w-sm">
+        <svg viewBox="0 0 400 120" className="w-full max-w-sm">
           <defs>
             <path
               id="arc-down"
-              d="M 50,10 Q 200,70 350,10"
+              d="M 50,20 Q 200,90 350,20"
               fill="transparent"
             />
           </defs>
