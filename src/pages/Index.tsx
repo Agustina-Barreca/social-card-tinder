@@ -81,16 +81,8 @@ const Index = () => {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden w-full max-w-md mx-auto">
-      {/* Status bar simulation */}
-      <div className="flex items-center justify-between px-4 sm:px-6 pt-2 text-foreground">
-        <span className="text-xl sm:text-2xl font-semibold">9:41</span>
-        <div className="flex items-center gap-1">
-          <div className="w-6 h-6" />
-        </div>
-      </div>
-
       {/* Top Navigation */}
-      <TopNavigation />
+      <TopNavigation showClock={hasReachedLimit} />
 
       {/* Main Content */}
       {activeTab === "home" ? (
