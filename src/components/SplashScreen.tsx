@@ -8,33 +8,21 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [audioReady, setAudioReady] = useState(false);
 
+  const handleCardClick = () => {
+    if (!audioReady) {
+      const audio = new Audio('/card-shuffle.mp3');
+      audio.volume = 0.7;
+      audio.play().catch(e => console.log('Audio play failed:', e));
+      audioRef.current = audio;
+      setAudioReady(true);
+    }
+  };
+
   useEffect(() => {
-    // Preload and play shuffle sound
+    // Preload audio
     const audio = new Audio('/card-shuffle.mp3');
     audio.volume = 0.7;
     audio.preload = 'auto';
-    
-    // Try to play immediately
-    const playPromise = audio.play();
-    
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          setAudioReady(true);
-        })
-        .catch(() => {
-          // If autoplay fails, add click listener to play on first interaction
-          const handleInteraction = () => {
-            audio.play().catch(e => console.log('Audio play failed:', e));
-            setAudioReady(true);
-            document.removeEventListener('click', handleInteraction);
-            document.removeEventListener('touchstart', handleInteraction);
-          };
-          document.addEventListener('click', handleInteraction);
-          document.addEventListener('touchstart', handleInteraction);
-        });
-    }
-    
     audioRef.current = audio;
 
     // Show splash for 3 seconds
@@ -63,7 +51,15 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
               fill="transparent"
             />
           </defs>
-          <text className="fill-white font-bebas text-7xl tracking-[0.15em]">
+          <text 
+            className="fill-white font-bebas tracking-[0.15em]" 
+            style={{ 
+              fontSize: '64px',
+              paintOrder: 'stroke fill',
+              stroke: 'rgba(0,0,0,0.2)',
+              strokeWidth: '1px'
+            }}
+          >
             <textPath href="#arc-up" startOffset="50%" textAnchor="middle">
               IT'S BEEN
             </textPath>
@@ -72,7 +68,11 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
       </div>
 
       {/* Card stack with shuffling animation */}
-      <div className="relative mb-12" style={{ width: '260px', height: '360px' }}>
+      <div 
+        className="relative mb-12 cursor-pointer" 
+        style={{ width: '260px', height: '360px' }}
+        onClick={handleCardClick}
+      >
         {/* Animated shuffling cards */}
         {[...Array(5)].map((_, i) => (
           <div
@@ -151,7 +151,15 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
               fill="transparent"
             />
           </defs>
-          <text className="fill-white font-bebas text-7xl tracking-[0.15em]">
+          <text 
+            className="fill-white font-bebas tracking-[0.15em]"
+            style={{ 
+              fontSize: '64px',
+              paintOrder: 'stroke fill',
+              stroke: 'rgba(0,0,0,0.2)',
+              strokeWidth: '1px'
+            }}
+          >
             <textPath href="#arc-down" startOffset="50%" textAnchor="middle">
               A MINUTE
             </textPath>
