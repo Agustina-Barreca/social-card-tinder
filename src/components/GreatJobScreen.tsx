@@ -18,7 +18,7 @@ export const GreatJobScreen = ({ onKeepGoing }: GreatJobScreenProps) => {
             <div className="absolute w-36 h-36 sm:w-40 sm:h-40 md:w-48 md:h-48 rounded-full bg-primary/20" />
             {/* Inner circle with icon */}
             <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full bg-primary flex items-center justify-center z-10">
-              <PartyPopper className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 text-primary-foreground" strokeWidth={2} />
+              <PartyPopper className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-primary-foreground" strokeWidth={2} />
             </div>
           </div>
         </div>
