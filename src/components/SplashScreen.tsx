@@ -1,42 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect } from "react";
 
 interface SplashScreenProps {
   onComplete: () => void;
 }
 
 export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [audioReady, setAudioReady] = useState(false);
-
   useEffect(() => {
-    // Preload and play shuffle sound
-    const audio = new Audio('/card-shuffle.mp3');
-    audio.volume = 0.7;
-    audio.preload = 'auto';
-    
-    // Try to play immediately
-    const playPromise = audio.play();
-    
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          setAudioReady(true);
-        })
-        .catch(() => {
-          // If autoplay fails, add click listener to play on first interaction
-          const handleInteraction = () => {
-            audio.play().catch(e => console.log('Audio play failed:', e));
-            setAudioReady(true);
-            document.removeEventListener('click', handleInteraction);
-            document.removeEventListener('touchstart', handleInteraction);
-          };
-          document.addEventListener('click', handleInteraction);
-          document.addEventListener('touchstart', handleInteraction);
-        });
-    }
-    
-    audioRef.current = audio;
-
     // Show splash for 3 seconds
     const timer = setTimeout(() => {
       onComplete();
@@ -44,15 +13,15 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
 
     return () => {
       clearTimeout(timer);
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
     };
   }, [onComplete]);
 
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#3d9999] p-8 overflow-hidden">
+      {/* Audio element with autoplay */}
+      <audio autoPlay preload="auto">
+        <source src="/card-shuffle.mp3" type="audio/mpeg" />
+      </audio>
       {/* Top text "It's Been" - curved upward */}
       <div className="relative mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
         <svg viewBox="0 0 400 80" className="w-full max-w-sm">
