@@ -5,6 +5,7 @@ import { BottomNavigation } from "@/components/BottomNavigation";
 import { GreatJobScreen } from "@/components/GreatJobScreen";
 import { SplashScreen } from "@/components/SplashScreen";
 import { ContactsList } from "@/components/ContactsList";
+import { ConfigView } from "@/components/ConfigView";
 import { dummyContacts, type Contact } from "@/data/contacts";
 
 const DAILY_LIMIT = 5;
@@ -120,9 +121,7 @@ const Index = () => {
       ) : activeTab === "contacts" ? (
         <ContactsList />
       ) : (
-        <div className="flex-1 flex items-center justify-center">
-          <p className="text-foreground">Configuración (próximamente)</p>
-        </div>
+        <ConfigView />
       )}
 
       {/* Bottom Navigation */}
