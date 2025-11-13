@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Calendar, Star, Info, Copy, MessageSquare, Phone, Clock, X, Check } from "lucide-react";
+import { Copy, MessageSquare, Phone, Clock, X, Check } from "lucide-react";
 import type { Contact } from "@/data/contacts";
 
 interface ContactCardProps {
@@ -185,16 +185,9 @@ export const ContactCard = ({
           </div>
 
           {/* Last contacted */}
-          <p className="text-center text-muted-foreground mb-4 text-sm">
+          <p className="text-center text-muted-foreground text-sm">
             Last contacted: {contact.lastContactDate}
           </p>
-
-          {/* Bottom icons */}
-          <div className="flex justify-center gap-6 items-center">
-            <Calendar className="w-6 h-6 text-muted-foreground" />
-            <Star className="w-7 h-7 text-yellow-500 fill-yellow-500" />
-            <Info className="w-6 h-6 text-muted-foreground" />
-          </div>
         </div>
 
         {/* BACK SIDE - Action options */}
