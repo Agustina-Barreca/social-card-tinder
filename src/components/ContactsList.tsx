@@ -31,7 +31,7 @@ export const ContactsList = () => {
                 className="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-cover flex-shrink-0"
               />
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-foreground text-sm sm:text-base truncate">{contact.name}</h3>
+                <h3 className="font-semibold text-card-foreground text-sm sm:text-base truncate">{contact.name}</h3>
                 <p className="text-xs sm:text-sm text-muted-foreground truncate">{contact.phoneNumber}</p>
               </div>
             </div>
