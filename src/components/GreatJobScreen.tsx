@@ -42,11 +42,6 @@ export const GreatJobScreen = ({ onKeepGoing }: GreatJobScreenProps) => {
             Keep Going
           </Button>
         </div>
-        
-        {/* Secondary message */}
-        <p className="text-xs sm:text-sm text-card-foreground/60 px-2">
-          Or come back tomorrow to continue reconnecting
-        </p>
       </div>
     </div>
   );
