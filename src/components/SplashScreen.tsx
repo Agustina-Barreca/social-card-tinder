@@ -63,9 +63,9 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
               fill="transparent"
             />
           </defs>
-          <text className="fill-white text-6xl font-black tracking-wider" style={{ fontFamily: 'Impact, Haettenschweiler, sans-serif' }}>
+          <text className="fill-white font-bebas text-7xl tracking-[0.15em]">
             <textPath href="#arc-up" startOffset="50%" textAnchor="middle">
-              It's Been
+              IT'S BEEN
             </textPath>
           </text>
         </svg>
@@ -151,9 +151,9 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
               fill="transparent"
             />
           </defs>
-          <text className="fill-white text-6xl font-black tracking-wider" style={{ fontFamily: 'Impact, Haettenschweiler, sans-serif' }}>
+          <text className="fill-white font-bebas text-7xl tracking-[0.15em]">
             <textPath href="#arc-down" startOffset="50%" textAnchor="middle">
-              a Minute
+              A MINUTE
             </textPath>
           </text>
         </svg>

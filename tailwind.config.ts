@@ -65,6 +65,9 @@ export default {
           bg: "hsl(var(--nav-bg))",
         },
       },
+      fontFamily: {
+        'bebas': ['Bebas Neue', 'Impact', 'Arial Black', 'sans-serif'],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
