@@ -79,10 +79,10 @@ const Index = () => {
   }
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden w-full max-w-md mx-auto">
+    <div className="fixed inset-0 flex flex-col w-full max-w-md mx-auto">
       {/* Main Content */}
       {activeTab === "home" ? (
-        <div className="flex-1 flex items-center justify-center relative px-4 sm:px-6 py-6">
+        <div className="flex-1 flex items-center justify-center relative px-4 sm:px-6 py-6 overflow-auto">
           {hasReachedLimit ? (
             <GreatJobScreen onKeepGoing={handleKeepGoing} />
           ) : (
@@ -107,13 +107,19 @@ const Index = () => {
           )}
         </div>
       ) : activeTab === "contacts" ? (
-        <ContactsList />
+        <div className="flex-1 overflow-auto">
+          <ContactsList />
+        </div>
       ) : (
-        <ConfigView />
+        <div className="flex-1 overflow-auto">
+          <ConfigView />
+        </div>
       )}
 
-      {/* Bottom Navigation */}
-      <BottomNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+      {/* Bottom Navigation - Fixed at bottom */}
+      <div className="flex-shrink-0">
+        <BottomNavigation activeTab={activeTab} onTabChange={setActiveTab} />
+      </div>
     </div>
   );
 };
