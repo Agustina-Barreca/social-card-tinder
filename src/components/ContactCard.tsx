@@ -101,17 +101,28 @@ export const ContactCard = ({
           {/* Divider */}
           <div className="h-1 bg-card-foreground/20 rounded-full mb-6 w-20 mx-auto" />
 
-          {/* Give a minute button */}
-          <button className="w-full bg-accent text-accent-foreground font-bold text-xl py-4 rounded-2xl mb-4 relative overflow-hidden group transition-transform active:scale-95">
-            <span className="relative z-10">Give a liiinute</span>
-            <div className="absolute right-4 top-1/2 -translate-y-1/2">
-              <div className="text-2xl transform rotate-12">✨</div>
+          {/* Action buttons */}
+          <div className="space-y-3 mb-4">
+            <button className="w-full bg-accent text-accent-foreground font-bold text-lg py-4 rounded-2xl relative overflow-hidden group transition-transform active:scale-95">
+              <span className="relative z-10">Give a minute</span>
+              <div className="absolute right-4 top-1/2 -translate-y-1/2">
+                <div className="text-2xl transform rotate-12">✨</div>
+              </div>
+            </button>
+            
+            <div className="flex gap-3">
+              <button className="flex-1 bg-secondary text-secondary-foreground font-semibold text-base py-3 rounded-2xl transition-transform active:scale-95">
+                Snooze
+              </button>
+              <button className="flex-1 bg-muted text-muted-foreground font-semibold text-base py-3 rounded-2xl transition-transform active:scale-95">
+                Cancel
+              </button>
             </div>
-          </button>
+          </div>
 
-          {/* Last connected */}
+          {/* Last contacted */}
           <p className="text-center text-muted-foreground mb-4 text-sm">
-            Last connected: {contact.lastContactDate}
+            Last contacted: {contact.lastContactDate}
           </p>
 
           {/* Bottom icons */}
