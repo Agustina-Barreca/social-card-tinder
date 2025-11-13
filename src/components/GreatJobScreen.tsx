@@ -7,7 +7,7 @@ interface GreatJobScreenProps {
 
 export const GreatJobScreen = ({ onKeepGoing }: GreatJobScreenProps) => {
   return (
-    <div className="min-h-[calc(100vh-80px)] flex items-center justify-center px-4 sm:px-6 bg-background py-8 pb-24">
+    <div className="h-full flex items-center justify-center px-4 sm:px-6 bg-background">
       <div className="text-center space-y-6 sm:space-y-8 max-w-sm w-full bg-card rounded-3xl shadow-lg p-8 sm:p-10 md:p-12 animate-fade-in">
         {/* Concentric circles with icon */}
         <div className="relative flex justify-center items-center py-6 sm:py-8">
@@ -42,6 +42,11 @@ export const GreatJobScreen = ({ onKeepGoing }: GreatJobScreenProps) => {
             Keep Going
           </Button>
         </div>
+        
+        {/* Secondary message */}
+        <p className="text-xs sm:text-sm text-card-foreground/60 px-2">
+          Or come back tomorrow to continue reconnecting
+        </p>
       </div>
     </div>
   );
