@@ -13,12 +13,12 @@ export const GreatJobScreen = ({ onKeepGoing }: GreatJobScreenProps) => {
         <div className="relative flex justify-center items-center py-8">
           <div className="relative flex items-center justify-center">
             {/* Outer circle */}
-            <div className="absolute w-64 h-64 rounded-full bg-accent/10" />
+            <div className="absolute w-64 h-64 rounded-full bg-primary/10" />
             {/* Middle circle */}
-            <div className="absolute w-48 h-48 rounded-full bg-accent/20" />
+            <div className="absolute w-48 h-48 rounded-full bg-primary/20" />
             {/* Inner circle with icon */}
-            <div className="relative w-32 h-32 rounded-full bg-accent flex items-center justify-center z-10">
-              <PartyPopper className="w-16 h-16 text-accent-foreground" strokeWidth={2} />
+            <div className="relative w-32 h-32 rounded-full bg-primary flex items-center justify-center z-10">
+              <PartyPopper className="w-16 h-16 text-primary-foreground" strokeWidth={2} />
             </div>
           </div>
         </div>
