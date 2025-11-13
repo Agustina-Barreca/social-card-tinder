@@ -86,11 +86,11 @@ const Index = () => {
 
       {/* Main Content */}
       {activeTab === "home" ? (
-        <div className="flex-1 flex items-center justify-center relative px-4 sm:px-6 py-4 sm:py-8">
+        <div className="flex-1 flex items-center justify-center relative px-4 sm:px-6 pb-8">
           {hasReachedLimit ? (
             <GreatJobScreen onKeepGoing={handleKeepGoing} />
           ) : (
-            <div className="relative w-full h-full max-h-[500px] flex items-center justify-center">
+            <div className="relative w-full h-full max-h-[550px] flex items-center justify-center">
               {contacts.length === 0 ? (
                 <div className="text-center text-foreground">
                   <p className="text-2xl font-bold mb-2">No more contacts!</p>
