@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { ContactCard } from "@/components/ContactCard";
-import { TopNavigation } from "@/components/TopNavigation";
 import { BottomNavigation } from "@/components/BottomNavigation";
 import { GreatJobScreen } from "@/components/GreatJobScreen";
 import { SplashScreen } from "@/components/SplashScreen";
@@ -81,9 +80,6 @@ const Index = () => {
 
   return (
     <div className="h-screen flex flex-col overflow-hidden w-full max-w-md mx-auto">
-      {/* Top Navigation */}
-      <TopNavigation showClock={hasReachedLimit} />
-
       {/* Main Content */}
       {activeTab === "home" ? (
         <div className="flex-1 flex items-center justify-center relative px-4 sm:px-6 py-6">
