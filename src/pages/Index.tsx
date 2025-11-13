@@ -1,14 +1,52 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ContactCard } from "@/components/ContactCard";
 import { TopNavigation } from "@/components/TopNavigation";
 import { BottomNavigation } from "@/components/BottomNavigation";
+import { GreatJobScreen } from "@/components/GreatJobScreen";
 import { dummyContacts, type Contact } from "@/data/contacts";
+
+const DAILY_LIMIT = 5;
+const STORAGE_KEY = "dailyContactsViewed";
+const DATE_KEY = "lastViewedDate";
 
 const Index = () => {
   const [contacts, setContacts] = useState<Contact[]>(dummyContacts);
+  const [viewedCount, setViewedCount] = useState(0);
+  const [hasReachedLimit, setHasReachedLimit] = useState(false);
+
+  // Initialize viewed count from localStorage
+  useEffect(() => {
+    const today = new Date().toDateString();
+    const lastDate = localStorage.getItem(DATE_KEY);
+    
+    if (lastDate !== today) {
+      // New day, reset counter
+      localStorage.setItem(DATE_KEY, today);
+      localStorage.setItem(STORAGE_KEY, "0");
+      setViewedCount(0);
+      setHasReachedLimit(false);
+    } else {
+      // Same day, load existing count
+      const stored = parseInt(localStorage.getItem(STORAGE_KEY) || "0");
+      setViewedCount(stored);
+      if (stored >= DAILY_LIMIT) {
+        setHasReachedLimit(true);
+      }
+    }
+  }, []);
 
   const handleSwipe = (direction: "left" | "right") => {
     console.log(`Swiped ${direction}`);
+    
+    // Increment viewed count
+    const newCount = viewedCount + 1;
+    setViewedCount(newCount);
+    localStorage.setItem(STORAGE_KEY, newCount.toString());
+    
+    // Check if limit reached
+    if (newCount >= DAILY_LIMIT) {
+      setHasReachedLimit(true);
+    }
     
     // Remove the top card after a brief delay
     setTimeout(() => {
@@ -29,26 +67,30 @@ const Index = () => {
       {/* Top Navigation */}
       <TopNavigation />
 
-      {/* Cards Container */}
+      {/* Cards Container or Great Job Screen */}
       <div className="flex-1 flex items-center justify-center relative px-6 py-8">
-        <div className="relative w-full max-w-md h-[500px] flex items-center justify-center">
-          {contacts.length === 0 ? (
-            <div className="text-center text-foreground">
-              <p className="text-2xl font-bold mb-2">No more contacts!</p>
-              <p className="text-muted-foreground">Check back later</p>
-            </div>
-          ) : (
-            contacts.slice(0, 3).map((contact, index) => (
-              <ContactCard
-                key={contact.id}
-                contact={contact}
-                onSwipe={handleSwipe}
-                isTop={index === 0}
-                index={index}
-              />
-            ))
-          )}
-        </div>
+        {hasReachedLimit ? (
+          <GreatJobScreen />
+        ) : (
+          <div className="relative w-full max-w-md h-[500px] flex items-center justify-center">
+            {contacts.length === 0 ? (
+              <div className="text-center text-foreground">
+                <p className="text-2xl font-bold mb-2">No more contacts!</p>
+                <p className="text-muted-foreground">Check back later</p>
+              </div>
+            ) : (
+              contacts.slice(0, 3).map((contact, index) => (
+                <ContactCard
+                  key={contact.id}
+                  contact={contact}
+                  onSwipe={handleSwipe}
+                  isTop={index === 0}
+                  index={index}
+                />
+              ))
+            )}
+          </div>
+        )}
       </div>
 
       {/* Bottom Navigation */}
