@@ -34,13 +34,15 @@ export const GreatJobScreen = ({ onKeepGoing }: GreatJobScreenProps) => {
         </div>
         
         {/* Primary button */}
-        <div className="pt-2 sm:pt-4">
-          <Button
+        <div className="pt-2 sm:pt-4 flex justify-center">
+          <button
             onClick={onKeepGoing}
-            className="w-full max-w-xs py-5 sm:py-6 text-sm sm:text-base font-semibold rounded-full bg-primary hover:bg-primary/90 text-primary-foreground"
+            className="w-[280px] sm:w-[320px] bg-card rounded-3xl p-6 card-stack-shadow border-4 border-foreground/10 transition-transform active:scale-95 hover:scale-105"
           >
-            Keep Going
-          </Button>
+            <div className="bg-primary text-primary-foreground font-bold text-base sm:text-lg py-4 rounded-2xl">
+              Keep Going
+            </div>
+          </button>
         </div>
         
         {/* Secondary message */}
