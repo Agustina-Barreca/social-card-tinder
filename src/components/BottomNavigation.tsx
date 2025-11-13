@@ -28,13 +28,13 @@ export const BottomNavigation = ({ activeTab, onTabChange }: BottomNavigationPro
             >
               <Icon 
                 className={`w-5 h-5 transition-colors ${
-                  isActive ? "text-accent" : "text-foreground/60"
+                  isActive ? "text-destructive" : "text-muted-foreground"
                 }`}
                 strokeWidth={2}
                 fill={isActive ? "currentColor" : "none"}
               />
               <span className={`text-[10px] font-medium transition-colors ${
-                isActive ? "text-accent" : "text-foreground/60"
+                isActive ? "text-destructive" : "text-muted-foreground"
               }`}>
                 {tab.label}
               </span>
