@@ -134,8 +134,7 @@ export const ContactCard = ({
         
         {/* FRONT SIDE - Main card */}
         <div 
-          onClick={handleFlip}
-          className="bg-card rounded-3xl p-6 card-stack-shadow border-4 border-foreground/10 cursor-pointer"
+          className="bg-card rounded-3xl p-6 card-stack-shadow border-4 border-foreground/10"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
