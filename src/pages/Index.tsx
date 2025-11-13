@@ -3,6 +3,7 @@ import { ContactCard } from "@/components/ContactCard";
 import { TopNavigation } from "@/components/TopNavigation";
 import { BottomNavigation } from "@/components/BottomNavigation";
 import { GreatJobScreen } from "@/components/GreatJobScreen";
+import { SplashScreen } from "@/components/SplashScreen";
 import { dummyContacts, type Contact } from "@/data/contacts";
 
 const DAILY_LIMIT = 5;
@@ -10,6 +11,7 @@ const STORAGE_KEY = "dailyContactsViewed";
 const DATE_KEY = "lastViewedDate";
 
 const Index = () => {
+  const [showSplash, setShowSplash] = useState(true);
   const [contacts, setContacts] = useState<Contact[]>(dummyContacts);
   const [viewedCount, setViewedCount] = useState(0);
   const [hasReachedLimit, setHasReachedLimit] = useState(false);
@@ -69,6 +71,10 @@ const Index = () => {
     setShowBonusCard(true);
     setHasReachedLimit(false);
   };
+
+  if (showSplash) {
+    return <SplashScreen onComplete={() => setShowSplash(false)} />;
+  }
 
   return (
     <div className="h-screen flex flex-col overflow-hidden">
