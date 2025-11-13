@@ -95,13 +95,13 @@ export const ContactCard = ({
         cursor: isTop ? "grab" : "default",
         perspective: "1000px",
       }}
-      onMouseDown={(e) => !isFlipped && handleDragStart(e.clientX, e.clientY)}
-      onMouseMove={(e) => !isFlipped && handleDragMove(e.clientX, e.clientY)}
-      onMouseUp={!isFlipped ? handleDragEnd : undefined}
-      onMouseLeave={!isFlipped ? handleDragEnd : undefined}
-      onTouchStart={(e) => !isFlipped && handleDragStart(e.touches[0].clientX, e.touches[0].clientY)}
-      onTouchMove={(e) => !isFlipped && handleDragMove(e.touches[0].clientX, e.touches[0].clientY)}
-      onTouchEnd={!isFlipped ? handleDragEnd : undefined}
+      onMouseDown={(e) => handleDragStart(e.clientX, e.clientY)}
+      onMouseMove={(e) => handleDragMove(e.clientX, e.clientY)}
+      onMouseUp={handleDragEnd}
+      onMouseLeave={handleDragEnd}
+      onTouchStart={(e) => handleDragStart(e.touches[0].clientX, e.touches[0].clientY)}
+      onTouchMove={(e) => handleDragMove(e.touches[0].clientX, e.touches[0].clientY)}
+      onTouchEnd={handleDragEnd}
     >
       <div 
         className="relative w-[300px] sm:w-[340px]"
@@ -116,7 +116,8 @@ export const ContactCard = ({
         
         {/* FRONT SIDE - Main card */}
         <div 
-          className="bg-card rounded-3xl p-6 card-stack-shadow border-4 border-foreground/10"
+          onClick={handleFlip}
+          className="bg-card rounded-3xl p-6 card-stack-shadow border-4 border-foreground/10 cursor-pointer"
           style={{
             backfaceVisibility: "hidden",
             WebkitBackfaceVisibility: "hidden",
@@ -144,7 +145,10 @@ export const ContactCard = ({
           {/* Action buttons */}
           <div className="space-y-3 mb-4">
             <button 
-              onClick={handleFlip}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleFlip();
+              }}
               className="w-full bg-accent text-accent-foreground font-bold text-lg py-4 rounded-2xl relative overflow-hidden group transition-transform active:scale-95"
             >
               <span className="relative z-10">Give a minute</span>
@@ -184,6 +188,12 @@ export const ContactCard = ({
             WebkitBackfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
           }}
+          onClick={(e) => {
+            // Only flip if clicking the background, not buttons
+            if (e.target === e.currentTarget) {
+              handleFlip();
+            }
+          }}
         >
           {/* Small avatar */}
           <div className="mb-6 flex justify-center">
@@ -204,7 +214,10 @@ export const ContactCard = ({
           {/* Action buttons */}
           <div className="space-y-3 mb-6">
             <button 
-              onClick={handleCopyPrompt}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCopyPrompt();
+              }}
               className="w-full bg-primary text-primary-foreground font-semibold text-base py-4 rounded-2xl transition-transform active:scale-95 flex items-center justify-center gap-2"
             >
               <Copy className="w-5 h-5" />
@@ -212,7 +225,10 @@ export const ContactCard = ({
             </button>
 
             <button 
-              onClick={handleOpenSMS}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleOpenSMS();
+              }}
               className="w-full bg-secondary text-secondary-foreground font-semibold text-base py-4 rounded-2xl transition-transform active:scale-95 flex items-center justify-center gap-2"
             >
               <MessageSquare className="w-5 h-5" />
@@ -220,7 +236,10 @@ export const ContactCard = ({
             </button>
 
             <button 
-              onClick={handleCall}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCall();
+              }}
               className="w-full bg-accent text-accent-foreground font-semibold text-base py-4 rounded-2xl transition-transform active:scale-95 flex items-center justify-center gap-2"
             >
               <Phone className="w-5 h-5" />
@@ -233,18 +252,27 @@ export const ContactCard = ({
 
           {/* Bottom actions */}
           <div className="flex gap-2">
-            <button className="flex-1 bg-muted text-muted-foreground font-medium text-sm py-3 rounded-xl transition-transform active:scale-95 flex items-center justify-center gap-1">
+            <button 
+              onClick={(e) => e.stopPropagation()}
+              className="flex-1 bg-muted text-muted-foreground font-medium text-sm py-3 rounded-xl transition-transform active:scale-95 flex items-center justify-center gap-1"
+            >
               <Clock className="w-4 h-4" />
               Snooze
             </button>
             <button 
-              onClick={handleFlip}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleFlip();
+              }}
               className="flex-1 bg-muted text-muted-foreground font-medium text-sm py-3 rounded-xl transition-transform active:scale-95 flex items-center justify-center gap-1"
             >
               <X className="w-4 h-4" />
               Skip
             </button>
-            <button className="flex-1 bg-primary/10 text-primary font-medium text-sm py-3 rounded-xl transition-transform active:scale-95 flex items-center justify-center gap-1">
+            <button 
+              onClick={(e) => e.stopPropagation()}
+              className="flex-1 bg-primary/10 text-primary font-medium text-sm py-3 rounded-xl transition-transform active:scale-95 flex items-center justify-center gap-1"
+            >
               <Check className="w-4 h-4" />
               Done
             </button>
