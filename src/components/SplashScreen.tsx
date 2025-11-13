@@ -40,10 +40,10 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#3d9999] p-8 overflow-hidden">
+    <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#3d9999] p-4 sm:p-8 overflow-hidden">
       {/* Top text "It's Been" - curved upward */}
-      <div className="relative mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-        <svg viewBox="0 0 400 120" className="w-full max-w-sm">
+      <div className="relative mb-8 sm:mb-12 animate-fade-in w-full max-w-sm px-4" style={{ animationDelay: '0.2s' }}>
+        <svg viewBox="0 0 400 120" className="w-full">
           <defs>
             <path
               id="arc-up"
@@ -69,8 +69,7 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
 
       {/* Card stack with shuffling animation */}
       <div 
-        className="relative mb-12 cursor-pointer" 
-        style={{ width: '260px', height: '360px' }}
+        className="relative mb-8 sm:mb-12 cursor-pointer w-full max-w-[260px] aspect-[13/18]" 
         onClick={handleCardClick}
       >
         {/* Animated shuffling cards */}
@@ -85,11 +84,11 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
             }}
           >
             {/* Spade at top left */}
-            <div className="absolute top-4 left-4 text-5xl leading-none">♠</div>
+            <div className="absolute top-3 left-3 sm:top-4 sm:left-4 text-4xl sm:text-5xl leading-none">♠</div>
             
             {/* Clock in center */}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-              <div className="relative w-36 h-36 rounded-full border-[6px] border-black flex items-center justify-center">
+              <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full border-[5px] sm:border-[6px] border-black flex items-center justify-center">
                 {/* Clock marks */}
                 <div className="absolute inset-0">
                   {[...Array(12)].map((_, j) => (
@@ -98,10 +97,10 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
                       className="absolute bg-black"
                       style={{
                         width: j % 3 === 0 ? '3px' : '2px',
-                        height: j % 3 === 0 ? '12px' : '8px',
-                        top: '8px',
+                        height: j % 3 === 0 ? '10px' : '6px',
+                        top: '6px',
                         left: '50%',
-                        transformOrigin: '50% 64px',
+                        transformOrigin: '50% 50px',
                         transform: `translateX(-50%) rotate(${j * 30}deg)`,
                       }}
                     />
@@ -110,7 +109,7 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
                 
                 {/* Hour hand - pointing to 12 */}
                 <div 
-                  className="absolute w-2 h-10 bg-black rounded-full"
+                  className="absolute w-1.5 sm:w-2 h-8 sm:h-10 bg-black rounded-full"
                   style={{
                     bottom: '50%',
                     left: '50%',
@@ -121,7 +120,7 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
                 
                 {/* Minute hand - pointing to 3 */}
                 <div 
-                  className="absolute w-1.5 h-14 bg-black rounded-full"
+                  className="absolute w-1 sm:w-1.5 h-11 sm:h-14 bg-black rounded-full"
                   style={{
                     bottom: '50%',
                     left: '50%',
@@ -131,19 +130,19 @@ export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
                 />
                 
                 {/* Center dot */}
-                <div className="absolute w-4 h-4 bg-black rounded-full z-10" />
+                <div className="absolute w-3 h-3 sm:w-4 sm:h-4 bg-black rounded-full z-10" />
               </div>
             </div>
             
             {/* Spade at bottom right - rotated */}
-            <div className="absolute bottom-4 right-4 text-5xl leading-none transform rotate-180">♠</div>
+            <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 text-4xl sm:text-5xl leading-none transform rotate-180">♠</div>
           </div>
         ))}
       </div>
 
       {/* Bottom text "a Minute" - curved downward */}
-      <div className="relative animate-fade-in" style={{ animationDelay: '0.6s' }}>
-        <svg viewBox="0 0 400 120" className="w-full max-w-sm">
+      <div className="relative animate-fade-in w-full max-w-sm px-4" style={{ animationDelay: '0.6s' }}>
+        <svg viewBox="0 0 400 120" className="w-full">
           <defs>
             <path
               id="arc-down"

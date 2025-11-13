@@ -13,8 +13,8 @@ export const BottomNavigation = ({ activeTab, onTabChange }: BottomNavigationPro
   ];
 
   return (
-    <div className="bg-nav-bg border-t border-foreground/20">
-      <div className="flex items-center justify-around px-4 py-3">
+    <div className="bg-nav-bg border-t border-foreground/20 safe-area-inset-bottom">
+      <div className="flex items-center justify-around px-4 py-2 sm:py-3">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -23,11 +23,11 @@ export const BottomNavigation = ({ activeTab, onTabChange }: BottomNavigationPro
             <button
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
-              className="flex flex-col items-center gap-1 transition-all duration-300 p-2"
+              className="flex flex-col items-center gap-0.5 sm:gap-1 transition-all duration-300 p-1.5 sm:p-2 min-w-[60px]"
               aria-label={tab.label}
             >
               <Icon 
-                className={`w-7 h-7 transition-colors ${
+                className={`w-6 h-6 sm:w-7 sm:h-7 transition-colors ${
                   isActive ? "text-accent" : "text-foreground"
                 }`}
                 strokeWidth={2}

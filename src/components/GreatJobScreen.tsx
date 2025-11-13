@@ -7,29 +7,29 @@ interface GreatJobScreenProps {
 
 export const GreatJobScreen = ({ onKeepGoing }: GreatJobScreenProps) => {
   return (
-    <div className="h-full flex items-center justify-center px-6">
-      <div className="text-center space-y-12 max-w-md animate-fade-in">
+    <div className="h-full flex items-center justify-center px-4 sm:px-6">
+      <div className="text-center space-y-8 sm:space-y-12 max-w-md animate-fade-in">
         {/* Decorative elements */}
         <div className="relative">
           {/* Large icon with gradient background */}
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center mb-6 sm:mb-8">
             <div className="relative">
               {/* Outer glow */}
               <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl scale-150 animate-pulse" />
               {/* Icon container */}
-              <div className="relative w-32 h-32 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center backdrop-blur-sm border border-primary/10">
-                <Heart className="w-16 h-16 text-primary fill-primary/20" />
+              <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center backdrop-blur-sm border border-primary/10">
+                <Heart className="w-12 h-12 sm:w-16 sm:h-16 text-primary fill-primary/20" />
               </div>
             </div>
           </div>
         </div>
         
         {/* Main message with refined typography */}
-        <div className="space-y-6">
-          <h1 className="text-5xl font-bold text-foreground tracking-tight">
+        <div className="space-y-4 sm:space-y-6">
+          <h1 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight">
             Great Job
           </h1>
-          <p className="text-2xl text-foreground/70 font-light">
+          <p className="text-xl sm:text-2xl text-foreground/70 font-light">
             You reconnected today
           </p>
         </div>
@@ -40,30 +40,30 @@ export const GreatJobScreen = ({ onKeepGoing }: GreatJobScreenProps) => {
         </div>
         
         {/* Supportive message with better spacing */}
-        <div className="space-y-4">
-          <p className="text-lg text-muted-foreground leading-relaxed max-w-sm mx-auto">
+        <div className="space-y-3 sm:space-y-4">
+          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-sm mx-auto px-4">
             You've reached out to 5 people today. 
           </p>
-          <p className="text-base text-muted-foreground/80 leading-relaxed max-w-sm mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground/80 leading-relaxed max-w-sm mx-auto px-4">
             Take a moment to breathe and appreciate the connections you're nurturing.
           </p>
         </div>
         
         {/* Keep Going Button */}
-        <div className="pt-8">
+        <div className="pt-6 sm:pt-8">
           <Button
             onClick={onKeepGoing}
             size="lg"
-            className="px-8 py-6 text-lg font-semibold rounded-full bg-primary hover:bg-primary/90 transition-all hover:scale-105"
+            className="px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-semibold rounded-full bg-primary hover:bg-primary/90 transition-all hover:scale-105"
           >
             Keep Going
           </Button>
         </div>
         
         {/* Bottom message with elegant styling */}
-        <div className="pt-8">
-          <div className="inline-block px-6 py-3 bg-muted/30 rounded-full backdrop-blur-sm border border-muted-foreground/10">
-            <p className="text-sm text-muted-foreground">
+        <div className="pt-6 sm:pt-8">
+          <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-muted/30 rounded-full backdrop-blur-sm border border-muted-foreground/10">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Or come back tomorrow to continue reconnecting
             </p>
           </div>

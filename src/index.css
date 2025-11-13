@@ -127,8 +127,12 @@ All colors MUST be HSL.
   }
   
   .nav-icon {
-    @apply w-14 h-14 rounded-full border-2 border-foreground flex items-center justify-center 
+    @apply w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-foreground flex items-center justify-center 
            transition-all duration-300 active:scale-95 cursor-pointer;
+  }
+  
+  .safe-area-inset-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
   }
   
   .nav-icon-active {
