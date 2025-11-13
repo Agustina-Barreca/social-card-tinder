@@ -1,122 +1,136 @@
-import { useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface SplashScreenProps {
   onComplete: () => void;
 }
 
 export const SplashScreen = ({ onComplete }: SplashScreenProps) => {
-  const [hasStarted, setHasStarted] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const handleStart = () => {
-    if (hasStarted) return;
-    setHasStarted(true);
-    
-    // Play shuffle sound
+  useEffect(() => {
+    // Play shuffle sound automatically
     audioRef.current = new Audio('/card-shuffle.mp3');
+    audioRef.current.volume = 0.7;
     audioRef.current.play().catch(e => console.log('Audio play failed:', e));
 
     // Show splash for 3 seconds
-    timerRef.current = setTimeout(() => {
+    const timer = setTimeout(() => {
       onComplete();
     }, 3000);
-  };
+
+    return () => {
+      clearTimeout(timer);
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, [onComplete]);
 
   return (
-    <div 
-      className="fixed inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-teal-600 to-teal-700 animate-fade-in cursor-pointer p-8"
-      onClick={handleStart}
-    >
-      {/* Top text "It's Been" */}
-      <div className="text-white text-6xl font-bold tracking-wider mb-8" style={{ fontFamily: 'Impact, sans-serif' }}>
-        <span className="inline-block transform -rotate-12">I</span>
-        <span className="inline-block transform -rotate-8">t</span>
-        <span className="inline-block transform -rotate-4">'</span>
-        <span className="inline-block transform rotate-0">s</span>
-        <span className="inline-block w-4"></span>
-        <span className="inline-block transform rotate-4">B</span>
-        <span className="inline-block transform rotate-8">e</span>
-        <span className="inline-block transform rotate-12">e</span>
-        <span className="inline-block transform rotate-16">n</span>
+    <div className="fixed inset-0 flex flex-col items-center justify-center bg-[#3d9999] p-8 overflow-hidden">
+      {/* Top text "It's Been" - curved upward */}
+      <div className="relative mb-12 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+        <svg viewBox="0 0 400 80" className="w-full max-w-sm">
+          <defs>
+            <path
+              id="arc-up"
+              d="M 50,70 Q 200,10 350,70"
+              fill="transparent"
+            />
+          </defs>
+          <text className="fill-white text-6xl font-black tracking-wider" style={{ fontFamily: 'Impact, Haettenschweiler, sans-serif' }}>
+            <textPath href="#arc-up" startOffset="50%" textAnchor="middle">
+              It's Been
+            </textPath>
+          </text>
+        </svg>
       </div>
 
-      {/* Card with clock */}
-      <div className="relative bg-white rounded-2xl p-8 shadow-2xl transform rotate-6 mb-8" style={{ width: '280px', height: '380px' }}>
-        {/* Spade at top */}
-        <div className="absolute top-4 left-4 text-4xl">♠</div>
+      {/* Card stack with clock - animated */}
+      <div className="relative mb-12 animate-scale-in" style={{ animationDelay: '0.4s' }}>
+        {/* Card stack effect - multiple cards behind */}
+        <div className="absolute top-2 left-2 w-[260px] h-[360px] bg-white rounded-2xl shadow-lg transform rotate-3 opacity-60" />
+        <div className="absolute top-1 left-1 w-[260px] h-[360px] bg-white rounded-2xl shadow-lg transform rotate-1.5 opacity-80" />
         
-        {/* Clock in center */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-          <div className="relative w-40 h-40 rounded-full border-8 border-black flex items-center justify-center">
-            {/* Clock marks */}
-            <div className="absolute inset-0">
-              {[...Array(12)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute w-1 h-3 bg-black"
-                  style={{
-                    top: '10%',
-                    left: '50%',
-                    transformOrigin: '0 170%',
-                    transform: `translateX(-50%) rotate(${i * 30}deg)`,
-                  }}
-                />
-              ))}
+        {/* Main card */}
+        <div className="relative bg-white rounded-2xl shadow-2xl transform rotate-2 hover:rotate-0 transition-transform duration-500" style={{ width: '260px', height: '360px' }}>
+          {/* Spade at top left */}
+          <div className="absolute top-4 left-4 text-5xl leading-none">♠</div>
+          
+          {/* Clock in center */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="relative w-36 h-36 rounded-full border-[6px] border-black flex items-center justify-center">
+              {/* Clock marks */}
+              <div className="absolute inset-0">
+                {[...Array(12)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute bg-black"
+                    style={{
+                      width: i % 3 === 0 ? '3px' : '2px',
+                      height: i % 3 === 0 ? '12px' : '8px',
+                      top: '8px',
+                      left: '50%',
+                      transformOrigin: '50% 64px',
+                      transform: `translateX(-50%) rotate(${i * 30}deg)`,
+                    }}
+                  />
+                ))}
+              </div>
+              
+              {/* Hour hand - pointing to 12 */}
+              <div 
+                className="absolute w-2 h-10 bg-black rounded-full"
+                style={{
+                  bottom: '50%',
+                  left: '50%',
+                  transformOrigin: 'bottom center',
+                  transform: 'translateX(-50%) rotate(0deg)',
+                }}
+              />
+              
+              {/* Minute hand - pointing to 3 */}
+              <div 
+                className="absolute w-1.5 h-14 bg-black rounded-full animate-spin"
+                style={{
+                  bottom: '50%',
+                  left: '50%',
+                  transformOrigin: 'bottom center',
+                  transform: 'translateX(-50%) rotate(90deg)',
+                  animationDuration: '3s',
+                  animationTimingFunction: 'ease-in-out',
+                  animationIterationCount: '1',
+                }}
+              />
+              
+              {/* Center dot */}
+              <div className="absolute w-4 h-4 bg-black rounded-full z-10" />
             </div>
-            
-            {/* Hour hand */}
-            <div 
-              className="absolute w-2 h-12 bg-black rounded-full"
-              style={{
-                bottom: '50%',
-                left: '50%',
-                transformOrigin: 'bottom center',
-                transform: 'translateX(-50%) rotate(90deg)',
-              }}
-            />
-            
-            {/* Minute hand */}
-            <div 
-              className="absolute w-1.5 h-16 bg-black rounded-full"
-              style={{
-                bottom: '50%',
-                left: '50%',
-                transformOrigin: 'bottom center',
-                transform: 'translateX(-50%) rotate(180deg)',
-              }}
-            />
-            
-            {/* Center dot */}
-            <div className="absolute w-3 h-3 bg-black rounded-full" />
           </div>
+          
+          {/* Spade at bottom right - rotated */}
+          <div className="absolute bottom-4 right-4 text-5xl leading-none transform rotate-180">♠</div>
         </div>
-        
-        {/* Spade at bottom */}
-        <div className="absolute bottom-4 right-4 text-4xl transform rotate-180">♠</div>
-        
-        {/* Card edge lines */}
-        <div className="absolute -right-2 top-0 bottom-0 w-8 bg-black/20 rounded-r-2xl" />
       </div>
 
-      {/* Bottom text "a Minute" */}
-      <div className="text-white text-6xl font-bold tracking-wider" style={{ fontFamily: 'Impact, sans-serif' }}>
-        <span className="inline-block transform -rotate-16">a</span>
-        <span className="inline-block w-6"></span>
-        <span className="inline-block transform -rotate-8">M</span>
-        <span className="inline-block transform -rotate-4">i</span>
-        <span className="inline-block transform rotate-0">n</span>
-        <span className="inline-block transform rotate-4">u</span>
-        <span className="inline-block transform rotate-8">t</span>
-        <span className="inline-block transform rotate-12">e</span>
+      {/* Bottom text "a Minute" - curved downward */}
+      <div className="relative animate-fade-in" style={{ animationDelay: '0.6s' }}>
+        <svg viewBox="0 0 400 80" className="w-full max-w-sm">
+          <defs>
+            <path
+              id="arc-down"
+              d="M 50,10 Q 200,70 350,10"
+              fill="transparent"
+            />
+          </defs>
+          <text className="fill-white text-6xl font-black tracking-wider" style={{ fontFamily: 'Impact, Haettenschweiler, sans-serif' }}>
+            <textPath href="#arc-down" startOffset="50%" textAnchor="middle">
+              a Minute
+            </textPath>
+          </text>
+        </svg>
       </div>
-
-      {/* Tap to start hint */}
-      {!hasStarted && (
-        <div className="absolute bottom-8 text-white/80 text-sm animate-pulse">
-          Toca para comenzar
-        </div>
-      )}
     </div>
   );
 };
