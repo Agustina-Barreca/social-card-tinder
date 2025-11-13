@@ -1,4 +1,4 @@
-import { Heart } from "lucide-react";
+import { PartyPopper } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface GreatJobScreenProps {
@@ -7,67 +7,47 @@ interface GreatJobScreenProps {
 
 export const GreatJobScreen = ({ onKeepGoing }: GreatJobScreenProps) => {
   return (
-    <div className="h-full flex items-center justify-center px-4 sm:px-6">
-      <div className="text-center space-y-8 sm:space-y-12 max-w-md animate-fade-in">
-        {/* Decorative elements */}
-        <div className="relative">
-          {/* Large icon with gradient background */}
-          <div className="flex justify-center mb-6 sm:mb-8">
-            <div className="relative">
-              {/* Outer glow */}
-              <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl scale-150 animate-pulse" />
-              {/* Icon container */}
-              <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center backdrop-blur-sm border border-primary/10">
-                <Heart className="w-12 h-12 sm:w-16 sm:h-16 text-primary fill-primary/20" />
-              </div>
-            </div>
+    <div className="h-full flex items-center justify-center px-4 bg-card">
+      <div className="text-center space-y-8 max-w-sm animate-fade-in">
+        {/* Concentric circles with icon */}
+        <div className="relative flex justify-center py-8">
+          {/* Outer circle */}
+          <div className="absolute w-64 h-64 rounded-full bg-accent/10" />
+          {/* Middle circle */}
+          <div className="absolute w-48 h-48 rounded-full bg-accent/20" />
+          {/* Inner circle with icon */}
+          <div className="relative w-32 h-32 rounded-full bg-accent flex items-center justify-center z-10">
+            <PartyPopper className="w-16 h-16 text-accent-foreground" strokeWidth={2} />
           </div>
         </div>
         
-        {/* Main message with refined typography */}
-        <div className="space-y-4 sm:space-y-6">
-          <h1 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight">
-            Great Job
+        {/* Title */}
+        <div className="space-y-4">
+          <h1 className="text-4xl font-bold text-card-foreground">
+            You're on a Roll!
           </h1>
-          <p className="text-xl sm:text-2xl text-foreground/70 font-light">
-            You reconnected today
+          <p className="text-base text-card-foreground/70 leading-relaxed px-4">
+            You've successfully sorted through a batch of contacts. Your network is looking cleaner already.
           </p>
         </div>
         
-        {/* Divider */}
-        <div className="flex justify-center">
-          <div className="w-16 h-1 bg-gradient-to-r from-transparent via-primary/30 to-transparent rounded-full" />
-        </div>
-        
-        {/* Supportive message with better spacing */}
-        <div className="space-y-3 sm:space-y-4">
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-sm mx-auto px-4">
-            You've reached out to 5 people today. 
-          </p>
-          <p className="text-sm sm:text-base text-muted-foreground/80 leading-relaxed max-w-sm mx-auto px-4">
-            Take a moment to breathe and appreciate the connections you're nurturing.
-          </p>
-        </div>
-        
-        {/* Keep Going Button */}
-        <div className="pt-6 sm:pt-8">
+        {/* Primary button */}
+        <div className="pt-4">
           <Button
             onClick={onKeepGoing}
-            size="lg"
-            className="px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg font-semibold rounded-full bg-primary hover:bg-primary/90 transition-all hover:scale-105"
+            className="w-full max-w-xs py-6 text-base font-semibold rounded-full bg-accent hover:bg-accent/90 text-accent-foreground"
           >
-            Keep Going
+            Keep Sorting Contacts
           </Button>
         </div>
         
-        {/* Bottom message with elegant styling */}
-        <div className="pt-6 sm:pt-8">
-          <div className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-muted/30 rounded-full backdrop-blur-sm border border-muted-foreground/10">
-            <p className="text-xs sm:text-sm text-muted-foreground">
-              Or come back tomorrow to continue reconnecting
-            </p>
-          </div>
-        </div>
+        {/* Secondary link */}
+        <button
+          onClick={() => window.location.reload()}
+          className="text-sm text-card-foreground/60 hover:text-card-foreground/80 transition-colors"
+        >
+          Take a Break
+        </button>
       </div>
     </div>
   );
