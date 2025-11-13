@@ -4,6 +4,7 @@ import { TopNavigation } from "@/components/TopNavigation";
 import { BottomNavigation } from "@/components/BottomNavigation";
 import { GreatJobScreen } from "@/components/GreatJobScreen";
 import { SplashScreen } from "@/components/SplashScreen";
+import { ContactsList } from "@/components/ContactsList";
 import { dummyContacts, type Contact } from "@/data/contacts";
 
 const DAILY_LIMIT = 5;
@@ -16,6 +17,7 @@ const Index = () => {
   const [viewedCount, setViewedCount] = useState(0);
   const [hasReachedLimit, setHasReachedLimit] = useState(false);
   const [showBonusCard, setShowBonusCard] = useState(false);
+  const [activeTab, setActiveTab] = useState("home");
 
   // Initialize viewed count from localStorage
   useEffect(() => {
@@ -89,34 +91,42 @@ const Index = () => {
       {/* Top Navigation */}
       <TopNavigation />
 
-      {/* Cards Container or Great Job Screen */}
-      <div className="flex-1 flex items-center justify-center relative px-6 py-8">
-        {hasReachedLimit ? (
-          <GreatJobScreen onKeepGoing={handleKeepGoing} />
-        ) : (
-          <div className="relative w-full max-w-md h-[500px] flex items-center justify-center">
-            {contacts.length === 0 ? (
-              <div className="text-center text-foreground">
-                <p className="text-2xl font-bold mb-2">No more contacts!</p>
-                <p className="text-muted-foreground">Check back later</p>
-              </div>
-            ) : (
-              contacts.slice(0, 3).map((contact, index) => (
-                <ContactCard
-                  key={contact.id}
-                  contact={contact}
-                  onSwipe={handleSwipe}
-                  isTop={index === 0}
-                  index={index}
-                />
-              ))
-            )}
-          </div>
-        )}
-      </div>
+      {/* Main Content */}
+      {activeTab === "home" ? (
+        <div className="flex-1 flex items-center justify-center relative px-6 py-8">
+          {hasReachedLimit ? (
+            <GreatJobScreen onKeepGoing={handleKeepGoing} />
+          ) : (
+            <div className="relative w-full max-w-md h-[500px] flex items-center justify-center">
+              {contacts.length === 0 ? (
+                <div className="text-center text-foreground">
+                  <p className="text-2xl font-bold mb-2">No more contacts!</p>
+                  <p className="text-muted-foreground">Check back later</p>
+                </div>
+              ) : (
+                contacts.slice(0, 3).map((contact, index) => (
+                  <ContactCard
+                    key={contact.id}
+                    contact={contact}
+                    onSwipe={handleSwipe}
+                    isTop={index === 0}
+                    index={index}
+                  />
+                ))
+              )}
+            </div>
+          )}
+        </div>
+      ) : activeTab === "contacts" ? (
+        <ContactsList />
+      ) : (
+        <div className="flex-1 flex items-center justify-center">
+          <p className="text-foreground">Configuración (próximamente)</p>
+        </div>
+      )}
 
       {/* Bottom Navigation */}
-      <BottomNavigation />
+      <BottomNavigation activeTab={activeTab} onTabChange={setActiveTab} />
     </div>
   );
 };

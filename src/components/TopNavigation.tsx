@@ -1,4 +1,4 @@
-import { ArrowLeft, Menu, Plus } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 export const TopNavigation = () => {
   return (
@@ -19,15 +19,8 @@ export const TopNavigation = () => {
         </div>
       </div>
 
-      {/* Menu button */}
-      <button className="nav-icon">
-        <Menu className="w-6 h-6" strokeWidth={2.5} />
-      </button>
-
-      {/* Add button - positioned absolutely */}
-      <button className="absolute right-6 top-20 nav-icon">
-        <Plus className="w-7 h-7" strokeWidth={2.5} />
-      </button>
+      {/* Spacer for symmetry */}
+      <div className="w-6" />
     </div>
   );
 };

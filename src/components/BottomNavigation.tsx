@@ -1,16 +1,15 @@
-import { Home, User, Calendar, Moon, Trophy, Settings } from "lucide-react";
-import { useState } from "react";
+import { Home, Users, Settings } from "lucide-react";
 
-export const BottomNavigation = () => {
-  const [activeTab, setActiveTab] = useState("profile");
+interface BottomNavigationProps {
+  activeTab: string;
+  onTabChange: (tab: string) => void;
+}
 
+export const BottomNavigation = ({ activeTab, onTabChange }: BottomNavigationProps) => {
   const tabs = [
     { id: "home", icon: Home, label: "Home" },
-    { id: "profile", icon: User, label: "Profile" },
-    { id: "calendar", icon: Calendar, label: "Calendar" },
-    { id: "moon", icon: Moon, label: "Moon" },
-    { id: "trophy", icon: Trophy, label: "Trophy" },
-    { id: "settings", icon: Settings, label: "Settings" },
+    { id: "contacts", icon: Users, label: "Contacts" },
+    { id: "config", icon: Settings, label: "Config" },
   ];
 
   return (
@@ -23,7 +22,7 @@ export const BottomNavigation = () => {
           return (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => onTabChange(tab.id)}
               className="flex flex-col items-center gap-1 transition-all duration-300 p-2"
               aria-label={tab.label}
             >
